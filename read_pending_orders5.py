@@ -2,16 +2,16 @@ import boto3
 from boto3.dynamodb.conditions import Key
 
 """
-Returns the record/s of orders with a 'Pending' status 
-There are no inputs needed 
+Returns the record/s of orders with a stated status 
+The only input needed is the status
 """
-def query_pending_orders(): 
+def query_pending_orders(status): 
     dynamodb = boto3.resource('dynamodb')
 
     table = dynamodb.Table('new_users-orders-items')
     response = table.query(
         IndexName='gsi_status_order_index',
-        KeyConditionExpression=Key('status').eq('Pending') & 
+        KeyConditionExpression=Key('status').eq(status) & 
                                Key('sk').begins_with('#ORDER#')
     )
     return response['Items']
@@ -21,7 +21,7 @@ print all pending orders
 """
 
 if __name__ == '__main__':
-    orders = query_pending_orders()
+    orders = query_pending_orders('Pending')
     list =[]
     #prints only the unique order bumbers
     for indiv_order in orders:
