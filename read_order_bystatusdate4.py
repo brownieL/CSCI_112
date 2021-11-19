@@ -25,10 +25,23 @@ It prints the profile of user "tgrimes1
 It also prints the "Placed" orders of user "tgrimes1" on "1987-02-26" 
 """
 if __name__ == '__main__':
-
-    print(user.query_user_profile("tgrimes1"))
-    
+    username = "tgrimes1"
+    status="Placed"
+    date= "1987-02-26"
+    profile=user.query_user_profile(username)
     #print all pending orders of tgrimes ordered on 1987=02=26
-    orders = query_userorder_statusdate("tgrimes1", "Placed", "1987-02-26")
-    for indiv_order in orders:
-        print(indiv_order['sk'])
+    orders = query_userorder_statusdate(username, status, date)
+    list =[]
+    for indiv_order in orders: 
+        list.append(indiv_order['sk'])
+    number_of_order = len(list)
+    if number_of_order>1: 
+        print('The ' + status +' order of user ' + username+ ' on '+ date + ' are:')
+        for i in list: 
+            print(i)
+        print('User ' + username+ "'s adress include " + str(profile[0]['address'])+', while their email is '+ str(profile[0]['email'])+'.')
+    elif number_of_order==1: 
+        print('The ' + status +' order of user ' + username+ ' on '+ date + ' is:'+ str(list[0]))
+        print('User ' + username+ "'s adress include " + str(profile[0]['address'])+', while their email is '+ str(profile[0]['email'])+'.')
+    elif number_of_order==0: 
+        print('User ' + username+ ' has no '+ status +' orders on ' + date+'.')
