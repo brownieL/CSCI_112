@@ -32,9 +32,11 @@ if __name__ == '__main__':
     #print all pending orders of tgrimes ordered on 1987=02=26
     orders = query_userorder_statusdate(username, status, date)
     list =[]
-    for indiv_order in orders: 
+    for indiv_order in orders:
+        #includes the orders in a list 
         list.append(indiv_order['sk'])
     number_of_order = len(list)
+    #This section improves the display on the screen
     if number_of_order>1: 
         print('The ' + status +' order of user ' + username+ ' on '+ date + ' are:')
         for i in list: 
@@ -42,6 +44,6 @@ if __name__ == '__main__':
         print('User ' + username+ "'s adress include " + str(profile[0]['address'])+', while their email is '+ str(profile[0]['email'])+'.')
     elif number_of_order==1: 
         print('The ' + status +' order of user ' + username+ ' on '+ date + ' is:'+ str(list[0]))
-        print('User ' + username+ "'s adress include " + str(profile[0]['address'])+', while their email is '+ str(profile[0]['email'])+'.')
+        print('User ' + username+ "'s addresses include " + str(profile[0]['address'])+', while their email is '+ str(profile[0]['email'])+'.')
     elif number_of_order==0: 
         print('User ' + username+ ' has no '+ status +' orders on ' + date+'.')
