@@ -21,7 +21,7 @@ print all pending orders
 """
 
 if __name__ == '__main__':
-    orders = query_pending_orders()
+    orders = query_pending_orders('Pending')
     list =[]
     #prints only the unique order bumbers
     for indiv_order in orders:
