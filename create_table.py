@@ -69,12 +69,6 @@ def create_new_users_status_date_table(
     except Exception as err:
         print("{0} Table could not be created".format(table_name))
         print("Error message {0}".format(err))
-        
-def delete_table(name):
-    dynamodb = boto3.resource('dynamodb')  
-    table = dynamodb.Table(name)
-    table.delete()
 
 if __name__ == '__main__':
     table = create_new_users_status_date_table("new_users-orders-items", "pk", "sk", "status","status_date")
-    # delete_table("users-orders-items")
