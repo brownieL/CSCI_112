@@ -21,13 +21,20 @@ print all pending orders
 """
 
 if __name__ == '__main__':
-    orders = query_pending_orders('Pending')
+    orders = query_pending_orders()
     list =[]
     #prints only the unique order bumbers
     for indiv_order in orders:
         order_num= indiv_order['sk']
         if order_num not in list:
-            print(order_num)
-            list.append(order_num)
+                print(order_num)
+                list.append(order_num)
+    number_of_pendingorder= len(list)
+    if number_of_pendingorder>1: 
+        print('There are '+ str(number_of_pendingorder) + ' pending orders.')
+    elif number_of_pendingorder==1: 
+        print('There is '+ str(number_of_pendingorder) + ' pending order.')
+    elif number_of_pendingorder==0: 
+        print('There is no pending order.')
             
             
